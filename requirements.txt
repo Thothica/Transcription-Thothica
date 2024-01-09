@@ -1,1 +1,1 @@
-deepgram
+deepgram-sdk==2.12.0
