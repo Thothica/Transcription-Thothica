@@ -1,15 +1,6 @@
-import asyncio
-import os
-from io import BytesIO
-from mimetypes import guess_type
-
-import aiohttp
-import requests
 import streamlit as st
 from deepgram import Deepgram
 import json
-import os
-from pytube import YouTube
 
 st.title("Thothica Rekhta Transcription")
 
