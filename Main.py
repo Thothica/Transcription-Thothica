@@ -1,5 +1,6 @@
 import streamlit as st
 from deepgram import Deepgram
+from deepgram_captions import DeepgramConverter, srt
 import json
 
 st.title("Thothica Rekhta Transcription")
@@ -14,6 +15,7 @@ deepgram = Deepgram(st.secrets["DEEPGRAM_API_KEY"])
 
 if uploaded_file is not None:
     source = {
+        "model" : "nova-2-ea",
         "buffer": uploaded_file,
         "mimetype": mimetype
     }
@@ -21,11 +23,11 @@ if uploaded_file is not None:
 
     st.subheader("Transcription Result:")
     st.write(response["results"]["channels"][0]["alternatives"][0]["transcript"])
-    result_json = json.dumps(response, indent = 2)
-    result_bytes = result_json.encode("utf-8")
+    transcription = DeepgramConverter(response)
+    captions = srt(transcription)
     st.download_button(
         label = "Download Transcription Result",
-        data = result_bytes,
-        file_name = "transcription_result.json",
+        data = captions,
+        file_name = "transcription_result.txt",
         key = "transcription_result_button",
     )

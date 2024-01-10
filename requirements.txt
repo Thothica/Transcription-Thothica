@@ -1,1 +1,2 @@
 deepgram-sdk==2.12.0
+deepgram-captions
